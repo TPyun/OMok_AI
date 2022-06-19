@@ -2214,6 +2214,7 @@ void AutoLay()
 	{
 		for (int j = 0; j < SIZE; j++)
 		{
+
 			whitedangerCoordinates[i][j] = whitedangerCoordinatesD1[i][j] + whitedangerCoordinatesD3[i][j] + whitedangerCoordinatesH[i][j] + whitedangerCoordinatesV[i][j];
 			blackdangerCoordinates[i][j] = blackdangerCoordinatesD1[i][j] + blackdangerCoordinatesD3[i][j] + blackdangerCoordinatesH[i][j] + blackdangerCoordinatesV[i][j];
 		}
@@ -2223,7 +2224,6 @@ void AutoLay()
 	{
 		down = 0;
 		right = 0;
-
 		int max = 0;
 		for (int i = 0; i < SIZE; i++)
 		{
@@ -2243,7 +2243,6 @@ void AutoLay()
 		}
 		//만약 위험한 곳 없을 때 0,0 그대로 나오지 않게 예외처리 해야함 방어할거 없으면 공격하게끔
 
-
 		if (down == 0 && right == 0)
 		{
 			max = 0;
@@ -2258,6 +2257,150 @@ void AutoLay()
 					if (max < whitedangerCoordinates[i][j])
 					{
 						max = whitedangerCoordinates[i][j];
+						down = i;
+						right = j;
+					}
+				}
+			}
+		}
+		if (down == 0 && right == 0)
+		{
+			for (int i = 0; i < SIZE; i++)
+			{
+				for (int j = 0; j < SIZE; j++)
+				{
+					if (coordinates[i][j] == whiteSign)
+					{
+						if (coordinates[i + 1][j + 1] == 0 && i + 1 >= 0 && i + 1 < 19 && j + 1 >= 0 && j + 1 < 19)
+						{
+							down = i + 1;
+							right = j + 1;
+						}
+						else if (coordinates[i - 1][j - 1] == 0 && i - 1 >= 0 && i - 1 < 19 && j - 1 >= 0 && j - 1 < 19)
+						{
+							down = i - 1;
+							right = j - 1;
+						}
+						else if (coordinates[i + 1][j - 1] == 0 && i + 1 >= 0 && i + 1 < 19 && j - 1 >= 0 && j - 1 < 19)
+						{
+							down = i + 1;
+							right = j - 1;
+						}
+						else if (coordinates[i - 1][j + 1] == 0 && i - 1 >= 0 && i - 1 < 19 && j + 1 >= 0 && j + 1 < 19)
+						{
+							down = i - 1;
+							right = j + 1;
+						}
+						else if (coordinates[i + 1][j] == 0 && i + 1 >= 0 && i + 1 < 19 && j >= 0 && j < 19)
+						{
+							down = i + 1;
+							right = j;
+						}
+						else if (coordinates[i - 1][j] == 0 && i - 1 >= 0 && i - 1 < 19 && j >= 0 && j < 19)
+						{
+							down = i - 1;
+							right = j;
+						}
+						else if (coordinates[i][j + 1] == 0 && i >= 0 && i < 19 && j + 1 >= 0 && j + 1 < 19)
+						{
+							down = i;
+							right = j + 1;
+						}
+						else if (coordinates[i][j - 1] == 0 && i >= 0 && i < 19 && j - 1 >= 0 && j - 1 < 19)
+						{
+							down = i;
+							right = j - 1;
+						}
+					}
+				}
+			}
+		}
+		if (down == 0 && right == 0)
+		{
+			for (int i = 0; i <= 18; i++)
+			{
+				for (int j = 8; j <= 10; j++)
+				{
+					if (coordinates[i][j] == 0)
+					{
+						down = i;
+						right = j;
+					}
+				}
+			}
+			for (int i = 2; i <= 15; i++)
+			{
+				for (int j = 8; j <= 10; j++)
+				{
+					if (coordinates[i][j] == 0)
+					{
+						down = i;
+						right = j;
+					}
+				}
+			}
+			for (int i = 5; i <= 13; i++)
+			{
+				for (int j = 8; j <= 10; j++)
+				{
+					if (coordinates[i][j] == 0)
+					{
+						down = i;
+						right = j;
+					}
+				}
+			}
+			for (int i = 8; i <= 10; i++)
+			{
+				for (int j = 8; j <= 10; j++)
+				{
+					if (coordinates[i][j] == 0)
+					{
+						down = i;
+						right = j;
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+		down = 0;
+		right = 0;
+		int max = 0;
+		int a, b;
+		for (int i = 0; i < SIZE; i++)
+		{
+			for (int j = 0; j < SIZE; j++)
+			{
+				if (coordinates[i][j] != 0)
+				{
+					whitedangerCoordinates[i][j] = 0;
+				}
+				if (max < whitedangerCoordinates[i][j])
+				{
+					max = whitedangerCoordinates[i][j];
+					down = i;
+					right = j;
+				}
+			}
+		}
+		//만약 위험한 곳 없을 때 0,0 그대로 나오지 않게 예외처리 해야함 방어할거 없으면 공격하게끔
+
+		if (down == 0 && right == 0)
+		{
+			max = 0;
+			for (int i = 0; i < SIZE; i++)
+			{
+				for (int j = 0; j < SIZE; j++)
+				{
+					if (coordinates[i][j] != 0)
+					{
+						blackdangerCoordinates[i][j] = 0;
+					}
+					if (max < blackdangerCoordinates[i][j])
+					{
+						max = blackdangerCoordinates[i][j];
 						down = i;
 						right = j;
 					}
@@ -2364,158 +2507,6 @@ void AutoLay()
 			}
 		}
 	}
-	else
-	{
-		down = 0;
-		right = 0;
-
-		int max = 0;
-		for (int i = 0; i < SIZE; i++)
-		{
-			for (int j = 0; j < SIZE; j++)
-			{
-				if (coordinates[i][j] != 0)
-				{
-					whitedangerCoordinates[i][j] = 0;
-				}
-				if (max < whitedangerCoordinates[i][j])
-				{
-					max = whitedangerCoordinates[i][j];
-					down = i;
-					right = j;
-					printf("흰색 위험도에 따라 방어\n");
-
-				}
-			}
-		}
-		//만약 위험한 곳 없을 때 0,0 그대로 나오지 않게 예외처리 해야함 방어할거 없으면 공격하게끔
-
-		if (down == 0 && right == 0)
-		{
-			max = 0;
-			for (int i = 0; i < SIZE; i++)
-			{
-				for (int j = 0; j < SIZE; j++)
-				{
-					if (coordinates[i][j] != 0)
-					{
-						blackdangerCoordinates[i][j] = 0;
-					}
-					if (max < blackdangerCoordinates[i][j])
-					{
-						max = blackdangerCoordinates[i][j];
-						down = i;
-						right = j;
-						printf("내 위험도에 따라 공격\n");
-
-					}
-				}
-			}
-		}
-		if (down == 0 && right == 0)
-		{
-			for (int i = 0; i < SIZE; i++)
-			{
-				for (int j = 0; j < SIZE; j++)
-				{
-					if (coordinates[i][j] == whiteSign)
-					{
-						if (coordinates[i + 1][j + 1] == 0 && i + 1 >= 0 && i + 1 < 19 && j + 1 >= 0 && j + 1 < 19)
-						{
-							down = i + 1;
-							right = j + 1;
-						}
-						else if (coordinates[i - 1][j - 1] == 0 && i - 1 >= 0 && i - 1 < 19 && j - 1 >= 0 && j - 1 < 19)
-						{
-							down = i - 1;
-							right = j - 1;
-						}
-						else if (coordinates[i + 1][j - 1] == 0 && i + 1 >= 0 && i + 1 < 19 && j - 1 >= 0 && j - 1 < 19)
-						{
-							down = i + 1;
-							right = j - 1;
-						}
-						else if (coordinates[i - 1][j + 1] == 0 && i - 1 >= 0 && i - 1 < 19 && j + 1 >= 0 && j + 1 < 19)
-						{
-							down = i - 1;
-							right = j + 1;
-						}
-						else if (coordinates[i + 1][j] == 0 && i + 1 >= 0 && i + 1 < 19 && j >= 0 && j < 19)
-						{
-							down = i + 1;
-							right = j;
-						}
-						else if (coordinates[i - 1][j] == 0 && i - 1 >= 0 && i - 1 < 19 && j >= 0 && j < 19)
-						{
-							down = i - 1;
-							right = j;
-						}
-						else if (coordinates[i][j + 1] == 0 && i >= 0 && i < 19 && j + 1 >= 0 && j + 1 < 19)
-						{
-							down = i;
-							right = j + 1;
-						}
-						else if (coordinates[i][j - 1] == 0 && i >= 0 && i < 19 && j - 1 >= 0 && j - 1 < 19)
-						{
-							down = i;
-							right = j - 1;
-						}
-						printf("둘거 없어서 적 돌 옆에\n");
-
-					}
-				}
-			}
-		}
-		if (down == 0 && right == 0)
-		{
-			for (int i = 0; i <= 18; i++)
-			{
-				for (int j = 8; j <= 10; j++)
-				{
-					if (coordinates[i][j] == 0)
-					{
-						down = i;
-						right = j;
-					}
-				}
-			}
-			for (int i = 2; i <= 15; i++)
-			{
-				for (int j = 8; j <= 10; j++)
-				{
-					if (coordinates[i][j] == 0)
-					{
-						down = i;
-						right = j;
-					}
-				}
-			}
-			for (int i = 5; i <= 13; i++)
-			{
-				for (int j = 8; j <= 10; j++)
-				{
-					if (coordinates[i][j] == 0)
-					{
-						down = i;
-						right = j;
-					}
-				}
-			}
-			for (int i = 8; i <= 10; i++)
-			{
-				for (int j = 8; j <= 10; j++)
-				{
-					if (coordinates[i][j] == 0)
-					{
-						down = i;
-						right = j;
-					}
-				}
-			}
-			printf("진짜 둘거 없어서 랜덤\n");
-
-		}
-	}
 
 
 
@@ -2538,7 +2529,7 @@ void AutoLay()
 			pushU(new);
 			coordinates[down][right] = whiteSign;
 			DeleteRstack();
-			//system("cls");
+			system("cls");
 			Update();
 		}
 		else
@@ -2547,7 +2538,7 @@ void AutoLay()
 			pushU(new);
 			coordinates[down][right] = blackSign;
 			DeleteRstack();
-			//system("cls");
+			system("cls");
 			Update();
 		}
 	}
@@ -2706,10 +2697,10 @@ int main()
 	while (1)
 	{
 
-		/*AutoLay();
-		getchar();*/
+		AutoLay();
+		getchar();
 
-		Laying();
+		//Laying();
 
 		
 
