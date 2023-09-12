@@ -2697,85 +2697,81 @@ int main()
 	while (1)
 	{
 
-		AutoLay();
-		getchar();
-
+		//AutoLay();
+		//getchar();
 		//Laying();
 
-		
+		printf("---------------------------------------------\n");
+		if (turn % 2 == whiteSign)
+		{
+			printf("Turn: white\n");
+		}
+		else
+		{
+			printf("Turn: black\n");
+		}
 
-		
-		//printf("---------------------------------------------\n");
-		//if (turn % 2 == whiteSign)
-		//{
-		//	printf("Turn: white\n");
-		//}
-		//else
-		//{
-		//	printf("Turn: black\n");
-		//}
+		printf("1.Save\n2.Load\n3.Undo\n4.ReUndo\n5.Put\nPress Number:");
+		scanf("%d", &order);
+		switch (order) {
+		case 1:
+		{
+			Save();
+			break;
+		}
+		case 2:
+		{
+			Load();
+			system("cls");
+			Update();
+			break;
+		}
+		case 3:
+		{
+			s* data = popU();
+			if (data == NULL)
+			{
+				printf("YOU CAN'T\n");
+				continue;
+			}
+			pushR(data);
+			coordinates[data->x][data->y] = 0;
 
-		//printf("1.Save\n2.Load\n3.Undo\n4.ReUndo\n5.Put\nPress Number:");
-		//scanf("%d", &order);
-		//switch (order) {
-		//case 1:
-		//{
-		//	Save();
-		//	break;
-		//}
-		//case 2:
-		//{
-		//	Load();
-		//	system("cls");
-		//	Update();
-		//	break;
-		//}
-		//case 3:
-		//{
-		//	s* data = popU();
-		//	if (data == NULL)
-		//	{
-		//		printf("YOU CAN'T\n");
-		//		continue;
-		//	}
-		//	pushR(data);
-		//	coordinates[data->x][data->y] = 0;
+			system("cls");
+			turn--;
+			whiteNum = 0;
+			blackNum = 0;
+			Update();
+			break;
+		}
+		case 4:
+		{
+			s* data = popR();
+			if (data == NULL)
+			{
+				printf("YOU CAN'T\n");
+				continue;
+			}
+			pushU(data);
+			coordinates[data->x][data->y] = data->color;
 
-		//	system("cls");
-		//	turn--;
-		//	whiteNum = 0;
-		//	blackNum = 0;
-		//	Update();
-		//	break;
-		//}
-		//case 4:
-		//{
-		//	s* data = popR();
-		//	if (data == NULL)
-		//	{
-		//		printf("YOU CAN'T\n");
-		//		continue;
-		//	}
-		//	pushU(data);
-		//	coordinates[data->x][data->y] = data->color;
-
-		//	system("cls");
-		//	turn++;
-		//	whiteNum = 0;
-		//	blackNum = 0;
-		//	Update();
-		//	break;
-		//}
-		//case 5:
-		//{
-		//	Laying();
-		//	break;
-		//}
-		//case 6:
-		//{
-		//	AutoLay();
-		//	break;
-		//}
-		//}
+			system("cls");
+			turn++;
+			whiteNum = 0;
+			blackNum = 0;
+			Update();
+			break;
+		}
+		case 5:
+		{
+			Laying();
+			break;
+		}
+		case 6:
+		{
+			AutoLay();
+			break;
+		}
+		}
 	}
 }
